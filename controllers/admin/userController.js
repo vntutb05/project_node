@@ -37,7 +37,7 @@ module.exports = {
     },
     delete :(req,res)=>{
         let id = req.params.id;
-        userModel.updateOne({_id:id},{$set:{isDeleted:0}},(err,result)=>{
+        userModel.updateOne({_id:id},{$set:{isDeleted:1}},(err,result)=>{
             if(err){
                 return res.status(500).json(err);
             }
