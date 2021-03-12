@@ -12,6 +12,10 @@ let categorySchema = new Schema({
     },creationDate:{
         type:Date,
         default: Date.now()
+    },
+    isDeleted:{
+        type:Boolean,
+        required:true
     }
 })
 let categoryModel = mongose.model('category',categorySchema);

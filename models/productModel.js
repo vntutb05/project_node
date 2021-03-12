@@ -9,6 +9,9 @@ let productSchema = new Schema({
     tag:{
         type:String
     },
+    cateId:{
+        type:String
+    },
     price:{
         type:Number,
         required:true
