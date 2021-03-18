@@ -1,46 +1,81 @@
 const categoryModel = require('../../models/categoryModel');
-
+const {validationResult} = require('express-validator');
 module.exports = {
-    index : (req,res)=>{
-        categoryModel.find((err,result)=>{
-            if(err){
-                return res.status(500).json(err);
-            }
-            return res.status(200).json(result);
-        })
+    index : async(req,res)=>{
+        try{
+            let result = await categoryModel.find({isDeleted:0});
+            return res.render('admin/cate/index',{data:result});
+        }catch(err){
+            return res.status(500).json(err);
+        }
     },
-    getAdd : (req,res)=>{
-        return res.status(200).json("Get add cate");
+    getAdd :async (req,res)=>{
+        return res.render('admin/cate/add');
     },
-    postAdd :(req,res)=>{
-        let data = req.body;
-        categoryModel.create(data,(err,result)=>{
-            if(err){
-                return res.status(500).json(err);
-            }
-            return res.status(200).json(result);
-        })
+    postAdd :async(req,res)=>{
+        let param = req.body;
+        let errors = validationResult(req);
+        let data = {
+            name:param.name,
+            description:param.description,
+            isDeleted:0
+        }
+        try{
+            if(!errors.isEmpty()){
+                let error = errors.array();
+                let data = param;
+                return res.render('admin/cate/add',{errors:error,data:data});
+            };
+            await categoryModel.create(data);
+            return res.redirect('/admin/cate/');
+        }catch(err){
+            return res.status(500).json(err);
+        }
     },
-    getEdit :(req,res)=>{
-        return res.status(200).json("Get edit cate");
-    },
-    postEdit :(req,res)=>{
-        let data = req.body;
+    getEdit :async (req,res)=>{
         let id = req.params.id;
-        categoryModel.updateOne({_id:id},{$set:data},(err,result)=>{
-            if(err){
-                return res.status(500).json(err);
+        try{
+            let result = await categoryModel.findOne({_id:id});
+            if(result === null){
+                return res.render('/admin/404');
             }
-            return res.status(200).json(result);
-        })
+            return res.render('admin/cate/edit',{data:result});
+        }catch(err){
+            return res.status(400).json(err);
+        }
     },
-    delete :(req,res)=>{
+    postEdit :async (req,res)=>{
+        let param = req.body;
+        let data = {
+            name : param.name,
+            description :param.description
+        };
         let id = req.params.id;
-        categoryModel.updateOne({_id:id},{$set:{isDeleted:1}},(err,result)=>{
-            if(err){
-                return res.status(500).json(err);
+        let errors = validationResult(req);
+        try{
+            if(!errors.isEmpty()){
+                let error = errors.array();
+                let data = param;
+                data._id = id;
+                return res.render('admin/cate/edit',{errors:error,data:data});
             }
-            return res.status(200).json(result);
-        })
+            await categoryModel.updateOne({_id:id},{$set:data});
+            return res.redirect('/admin/cate/');
+        }catch(err){
+            return res.status(500).json(err);
+        }
+    },
+    delete : async (req,res)=>{
+        let id = req.params.id;
+        try{   
+            let findCate = await categoryModel.findOne({_id:id});
+            await categoryModel.updateOne({_id:id},{$set:{isDeleted:1}});
+            if(findCate === null){
+                return res.render('admin/404');
+            }
+            return res.redirect('/admin/cate/');
+        }catch(err){   
+            return res.status(400).json(err);
+        }
     }
 }

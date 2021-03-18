@@ -14,38 +14,28 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                       <th>Category</th>
-                      <th>Price</th>
                       <th>Decription</th>
-                      <th>Author</th>
-                      <th>Start upload</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>Name</th>
-                     <th>Category</th>
-                     <th>Price</th>
-                     <th>Decription</th>
-                     <th>Author</th>
-                     <th>Start upload</th>
-                     <th>Action</th>
+                      <th>Decription</th>
+                      <th>Action</th>
                     </tr>
                   </tfoot>
                   <tbody>
-                    <tr>
-                      <td>Sản phẩm 1</td>
-                      <td>Danh mục 1</td>
-                      <td>1000000</td>
-                      <td>Sản phẩm tốt</td>
-                      <td>vntutb</td>
-                      <td>2011/04/25</td>
-                      <td>
-                            <a href="" class="alert alert-primary">Edit</a>
-                            <a href="" class="alert alert-danger">Delete</a>
-                      </td>
-                    </tr>
+                    <%data.forEach(function(item){%>
+                      <tr>
+                        <td><%=item.name%></td>
+                        <td><%= item.description%></td>
+                        <td>
+                              <a href="/admin/cate/edit/<%=item._id%>" class="alert alert-primary">Edit</a>
+                              <a href="/admin/cate/delete/<%=item._id%>" class="alert alert-danger">Delete</a>
+                        </td>
+                      </tr>
+                      <%})%>
                   </tbody>
                 </table>
             </div>

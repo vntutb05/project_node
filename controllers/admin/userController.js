@@ -27,12 +27,20 @@ module.exports = {
             isAdmin:param.power,
             isDeleted:0
         }
-        userModel.create(data,(err,result)=>{
-            if(err){
-                return res.status(500).json(err);
+        userModel.find({email:params.email},function(err,result){
+            if(result.length>0){
+                return res.redirect("/admin/user/add");
+            }else if(result.length==0){
+                userModel.create(data,function(err1,resultCre){
+                    if(err1){
+                        return res.status(500).json(err1);
+                    }else{
+                        return res.redirect("/admin/user/");
+                    }
+                })
+                
             }
-            return res.redirect('/admin/user/');
-        })
+        });
     },
     getEdit : (req,res)=>{
         let id = req.params.id;
@@ -45,7 +53,6 @@ module.exports = {
             }
             return res.render('admin/user/edit',{data:result});
         })
-       
     },
     postEdit :(req,res)=>{
         let id = req.params.id;
@@ -81,8 +88,7 @@ module.exports = {
             if(err){
                 return res.status(500).json(err);
             }
-            return res.status(200).json(result);
+            return res.redirect('/admin/user');
         })
     }
-
 }
