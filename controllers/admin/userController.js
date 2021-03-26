@@ -67,7 +67,8 @@ module.exports = {
             name : param.name,
             email : param.email,
             address :param.address,
-            phone : param.phone
+            phone : param.phone,
+            isAdmin:param.power
         }
         if(param.password){
             data.password = param.password
