@@ -1,14 +1,9 @@
-<%- include("../../layout/admin/head")%>
-
-<%- include("../../layout/admin/slidebar")%>
-
-<%- include("../../layout/admin/topbar")%>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Edit Categories</h6>
         </div>
-        <%-include("../../layout/message")%>
+        <%-include("../partials/message")%>
         <div class="col-12">
             <form action="/admin/cate/edit/<%=data._id%>" class="formReg" method="POST">
                 <div class="form-group">
@@ -24,4 +19,3 @@
         </div>
     </div>
 </div>
-<%- include("../../layout/admin/footer")%>

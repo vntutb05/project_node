@@ -1,95 +1,135 @@
 const userModel = require('../../models/userModel');
 const {validationResult} = require('express-validator');
-module.exports = {
-    index:(req,res)=>{
-        userModel.find({isDeleted:0},(err,result)=>{
-            if(err){
-                return res.status(500).json(err);
-            }
-            return res.render('admin/user/index',{data:result});
+const bcrypt = require('bcrypt');
+const userPage = {
+    index : 'user/index',
+    add : 'user/add',
+    edit : 'user/edit'
+}
+let index = async (req,res)=>{
+    try{
+        let users = await userModel.find({isDeleted:0});
+        return res.render('admin/layout/master',{
+            content : userPage.index,
+            data : users
         })
-    },
-    getAdd : (req,res)=>{
-        return res.render('admin/user/add');
-    },
-    postAdd : (req,res)=>{
-        let param = req.body;
-        const errors = validationResult(req);
+    }catch(err){
+        return res.status(500).json(err);
+    }
+}
+let getAdd = async (req,res)=>{
+    try{
+        return await res.render('admin/layout/master',{
+            content : userPage.add,
+            data :''
+        })
+    }catch(err){
+        return res.status(500).json(err);
+    }
+}
+let postAdd = async (req,res)=>{
+    let param = req.body;
+    const errors = validationResult(req);
+    const hash= bcrypt.hashSync(param.password, 10)
+    let data = {
+        email:param.email,
+        name:param.name,
+        address:param.address,
+        phone:param.phone,
+        password:hash,
+        isAdmin:param.power,
+        isDeleted:0
+    }
+
+    try {
         if(!errors.isEmpty()){
-            return res.render('admin/user/add',{errors:errors.array()});
+            return res.render('admin/layout/master',{
+                content : userPage.add,
+                errors:errors.array(),
+            });
         }
-        let data = {
-            email:param.email,
-            name:param.name,
-            address:param.address,
-            phone:param.phone,
-            password:param.password,
-            isAdmin:param.power,
-            isDeleted:0
+        let user = await userModel.findOne({email:data.email});
+        if(user!=null){
+            req.flash('error',"Tài khoản đã tồn tại.Vui lòng sử dụng email khác");
+            return res.redirect("/admin/user/add");
+        }else{
+            await userModel.create(data);
+            req.flash('success','Thêm user thành công');
+            return res.redirect('/admin/user/')
         }
-        userModel.find({email:params.email},function(err,result){
-            if(result.length>0){
-                return res.redirect("/admin/user/add");
-            }else if(result.length==0){
-                userModel.create(data,function(err1,resultCre){
-                    if(err1){
-                        return res.status(500).json(err1);
-                    }else{
-                        return res.redirect("/admin/user/");
-                    }
-                })
-                
-            }
-        });
-    },
-    getEdit : (req,res)=>{
-        let id = req.params.id;
-        userModel.findOne({_id:id},(err,result)=>{
-            if(result == null){
-                return res.redirect('/admin/404');
-            }
-            if(err){
-                return res.status(500).json(err);
-            }
-            return res.render('admin/user/edit',{data:result});
-        })
-    },
-    postEdit :(req,res)=>{
-        let id = req.params.id;
-        let param = req.body;   
-        const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            let data = param;
-            data._id=id;
-            return res.render('admin/user/edit',{errors:errors.array(),data:data});
-        }
-        let data = {
-            name : param.name,
-            email : param.email,
-            address :param.address,
-            phone : param.phone,
-            isAdmin:param.power
-        }
-        if(param.password){
-            data.password = param.password
-        }
-        userModel.updateOne({_id:id},{$set:data},(err,result)=>{
-            if(err){
-                return res.status(500).json(err);
-            }
-            return res.redirect('/admin/user/');
-        })
-    },
-    delete :(req,res)=>{
-        let id = req.params.id;
-        userModel.updateOne({_id:id},{$set:{isDeleted:1}},(err,result)=>{
-            if(result == null){
-                return res.redirect('/admin/404');
-            }
-            if(err){
-                return res.status(500).json(err);
-            }
-            return res.redirect('/admin/user');
+    } catch (error) {
+        return res.status(500).json({
+            type:'erorr',
+            msg : error
         })
     }
+}
+let getEdit = async (req,res)=>{
+    try{
+        let result = await userModel.findOne({_id:req.params.id});
+        if(result == null){
+            return res.render('admin/layout/master',{
+                content : '/404',
+                data : ''
+            })
+        }
+        return res.render('admin/layout/master',{
+            content : userPage.edit,
+            data:result
+        })
+    }catch(err){
+        return res.status(500).json({
+            type:"error",
+            msg:err
+        })
+    }
+}
+let postEdit = async (req,res)=>{
+    let param = req.body;
+    let data = {
+        name:param.name,
+        address:param.address,
+        phone:param.phone,
+        isAdmin:param.power,
+    }
+    const hash= bcrypt.hashSync(param.password, 10)
+    if(param.password != null){
+        data.password = hash;
+    }
+    const errors = validationResult(req);
+    try {
+        if(!errors.isEmpty()){
+            return res.render('admin/layout/master',{
+                content : userPage.add,
+                errors:errors.array(),
+            });
+        }
+        await userModel.updateOne({_id:req.params.id},data);
+        req.flash('success','Sửa user thành công');
+        return res.redirect('/admin/user/');
+    } catch (error) {
+        return res.status(500).json({
+            type : 'erorr',
+            msg : error
+        })
+    }
+}
+let _delete = async (req,res)=>{
+    try {
+        await userModel.deleteOne({_id:req.params.id});
+        return res.redirect('/admin/user');
+    } catch (error) {
+        return res.status(500).json({
+            type : "error",
+            msg : error
+        })
+    }
+}
+module.exports = {
+    index : index,
+    getAdd : getAdd,
+    postAdd : postAdd,
+    getEdit : getEdit,
+    postEdit : postEdit,
+    delete : _delete
 }

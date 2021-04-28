@@ -1,8 +1,15 @@
 <div class="message" style="margin-top:10px">
     <ul>
-        <%if(seccess_message.length>0){%>
-            <%seccess_message.forEach(function(message){%>
+        <%if(success_message.length>0){%>
+            <%success_message.forEach(function(message){%>
                  <li class="alert alert-success" style="list-style: none;"><%=message%>
+                    <i class="fa fa-times" onclick="exit_message()" style="float: right;cursor: pointer;"></i>
+                </li>
+            <%})%>
+        <%}%>
+        <%if(error_message.length>0){%>
+            <%error_message.forEach(function(message){%>
+                <li class="alert alert-danger" style="list-style: none"><%=message%>
                     <i class="fa fa-times" onclick="exit_message()" style="float: right;cursor: pointer;"></i>
                 </li>
             <%})%>

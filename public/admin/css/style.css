@@ -18,3 +18,20 @@ form{
 .notfound a{
     text-decoration: none;
 }
+.bg-gradient-primary{
+    background-color: #0d0808;
+    background-image: none;
+}
+.btn-primary{
+    background-color: #0d0808;
+    border: #0d0808;
+}
+.text-primary{
+    color: #0d0808  !important;
+}
+.page-item.active .page-link{
+    background-color: #0d0808;
+}
+.dropdown-header{
+    background-color: #0d0808 !important;
+}

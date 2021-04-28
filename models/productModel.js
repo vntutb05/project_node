@@ -4,10 +4,13 @@ const Schema = mongoose.Schema;
 let productSchema = new Schema({
     name:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
-    tag:{
-        type:String
+    slug:{
+        type:String,
+        required:true,
+        unique:true
     },
     cateId:{
         type:String
@@ -26,18 +29,25 @@ let productSchema = new Schema({
     image:{
         data:{
             type:Buffer,
-            contentType:String
         },
-        content:{
+        contentType:{
             type:String
         }
     },isDeleted:{
         type:Boolean,
         required:true
+    },
+    popular:{
+        type:Boolean,
+        default:false
+    },
+    hot:{
+        type :Boolean,
+        default: false
     }
     ,creationDate:{
         type:Date,
-        default: Date.now()
+        default: new Date()
     }
 })
 let productModel = mongoose.model('product',productSchema);

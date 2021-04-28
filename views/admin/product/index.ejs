@@ -1,8 +1,4 @@
-<%- include("../../layout/admin/head")%>
 
-<%- include("../../layout/admin/slidebar")%>
-
-<%- include("../../layout/admin/topbar")%>
   <div class="container-fluid">
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -15,9 +11,9 @@
                     <tr>
                       <th>Name</th>
                       <th>Category</th>
-                      <th>Tag</th>
                       <th>Price</th>
                       <th>Sale Price</th>
+                      <th>Image</th>
                       <th>Decription</th>
                       <th>Start upload</th>
                       <th>Action</th>
@@ -27,9 +23,9 @@
                     <tr>
                       <th>Name</th>
                       <th>Category</th>
-                      <th>Tag</th>
                       <th>Price</th>
                       <th>Sale Price</th>
+                      <th>Image</th>
                       <th>Decription</th>
                       <th>Start upload</th>
                       <th>Action</th>
@@ -39,10 +35,16 @@
                     <%data.forEach(function(item){%>
                       <tr>
                         <td><%= item.name%></td>
-                        <td>Danh mục 1</td>
-                        <td><%= item.tag%></td>
+                        <td>
+                          <%cate.forEach(function(cate){%>
+                              <%if(cate._id==data.cateId){%>
+                                  <%=cate.name%>
+                              <%}%>
+                          <%})%>
+                      </td>
                         <td><%= item.price%></td>
                         <td><%= item.sale%></td>
+                        <td><img src="data:<%=item.image.contentType%>;base64,<%=item.image.data%>" height="64px" width="64px">  </td>
                         <td><%= item.description%></td>
                         <td>2011/04/25</td>
                         <td>
@@ -56,4 +58,3 @@
                 </table>
             </div>
         </div>
-<%- include("../../layout/admin/footer")%>

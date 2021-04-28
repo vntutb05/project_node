@@ -1,16 +1,11 @@
-<%- include("../../layout/admin/head")%>
-
-<%- include("../../layout/admin/slidebar")%>
-
-<%- include("../../layout/admin/topbar")%>
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Add Products</h6>
         </div>
-        <%-include("../../layout/message")%>
+        <%-include("../partials/message")%>
         <div class="col-12">
-            <form action="/admin/product/add" class="formReg" method="POST" >
+            <form action="/admin/product/add" class="formReg" method="POST" enctype="multipart/form-data" >
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" placeholder="Input name product" class="form-control" id="name" name="name" value ="<%=(typeof(data)=='undefined') ? '' :data.name%>">
@@ -18,14 +13,10 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Category select</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="category">
-                        <% cate.forEach(function(cate){%>
-                            <option value="<%=cate._id%>" ><%=cate.name%></option>
+                        <% cate.forEach(function(item){%>
+                            <option value="<%=item._id%>" ><%=item.name%></option>
                         <%})%>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="tag">Tag</label>
-                    <input type="text" placeholder="Input tag" class="form-control" id="tag" name="tag" value ="<%=(typeof(data)=='undefined') ? '' :data.tag%>">
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
@@ -37,15 +28,28 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" placeholder="Your Sale Price.." class="form-control" id="description" name="description" value ="<%=(typeof(data)=='undefined') ? '' :data.description%>">
+                    <textarea name="description" id="description" cols= "160" rows="4"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="iamge">Image</label>
                     <input type="file" class="form-control" name="image" id="image">
                 </div>
+                <div class="row mb-3 pl-3">
+                    <div class="form-check col-6">
+                        <input class="form-check-input" type="checkbox" value="popular" id="flexCheckChecked" name="popular">
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Popular Product
+                        </label>
+                      </div>
+                      <div class="form-check col-6">
+                        <input class="form-check-input" type="checkbox" value="top" id="flexCheckChecked" name="top">
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Top Product
+                        </label>
+                      </div>
+                </div>  
                 <button type="submit" class="btn btn-primary  btn-user btn-block mt-2">Lưu</button>
             </form>
         </div>
     </div>
 </div>
-<%- include("../../layout/admin/footer")%>

@@ -1,22 +1,35 @@
 const categoryModel = require('../../models/categoryModel');
+const slug = require('slug');
 const {validationResult} = require('express-validator');
+const catePage ={
+    index : 'cate/index',
+    add : 'cate/add',
+    edit : 'cate/edit'
+}
 module.exports = {
     index : async(req,res)=>{
         try{
             let result = await categoryModel.find({isDeleted:0});
-            return res.render('admin/cate/index',{data:result});
+            return res.render('admin/layout/master',{
+                content:catePage.index,
+                data:result
+            });
         }catch(err){
             return res.status(500).json(err);
         }
     },
     getAdd :async (req,res)=>{
-        return res.render('admin/cate/add');
+        return res.render('admin/layout/master',{
+            content:catePage.add,
+            data:''
+        });
     },
     postAdd :async(req,res)=>{
         let param = req.body;
         let errors = validationResult(req);
         let data = {
             name:param.name,
+            slug:slug(param.name,'_'),
             description:param.description,
             isDeleted:0
         }
@@ -24,9 +37,13 @@ module.exports = {
             if(!errors.isEmpty()){
                 let error = errors.array();
                 let data = param;
-                return res.render('admin/cate/add',{errors:error,data:data});
+                return res.render('admin/layout/master',{
+                    content:catePage.add,
+                    errors:error,data:data
+                });
             };
             await categoryModel.create(data);
+            req.flash('success','Thêm category thành công');
             return res.redirect('/admin/cate/');
         }catch(err){
             return res.status(500).json(err);
@@ -39,7 +56,10 @@ module.exports = {
             if(result === null){
                 return res.render('/admin/404');
             }
-            return res.render('admin/cate/edit',{data:result});
+            return res.render('admin/layout/master',{
+                content:catePage.edit,
+                data:result
+            });
         }catch(err){
             return res.status(400).json(err);
         }
@@ -57,9 +77,13 @@ module.exports = {
                 let error = errors.array();
                 let data = param;
                 data._id = id;
-                return res.render('admin/cate/edit',{errors:error,data:data});
+                return res.render('admin/layout/master',{
+                    content:catePage.edit,
+                    errors:error,data:data
+                });
             }
             await categoryModel.updateOne({_id:id},{$set:data});
+            req.flash('success','Sửa category thành công');
             return res.redirect('/admin/cate/');
         }catch(err){
             return res.status(500).json(err);

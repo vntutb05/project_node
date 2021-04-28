@@ -4,6 +4,12 @@ const Schema = mongose.Schema;
 let categorySchema = new Schema({
     name:{
         type:String,
+        unique:true,
+        required:true
+    },
+    slug:{
+        type:String,
+        unique:true,
         required:true
     },
     description:{
