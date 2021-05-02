@@ -5,5 +5,6 @@ Route.route('/').get(homeController.home);
 Route.route('/about').get(homeController.about);
 Route.route('/contact').get(homeController.contact);
 Route.route('/blog').get(homeController.blog);
+Route.route('/shop/:slug').get(homeController.shop);
 
 module.exports = Route;

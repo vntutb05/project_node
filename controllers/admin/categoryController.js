@@ -29,7 +29,7 @@ module.exports = {
         let errors = validationResult(req);
         let data = {
             name:param.name,
-            slug:slug(param.name,'_'),
+            slug:slug(param.name,'-'),
             description:param.description,
             isDeleted:0
         }
@@ -68,6 +68,7 @@ module.exports = {
         let param = req.body;
         let data = {
             name : param.name,
+            slug : slug(param.name,'-'),
             description :param.description
         };
         let id = req.params.id;

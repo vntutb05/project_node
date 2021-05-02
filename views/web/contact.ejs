@@ -18,19 +18,19 @@
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
                         <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/blog">Blog</a></li>
                         <li>
                             <!-- First Tier Drop Down -->
-                            <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                            <label for="drop-2" class="toggle">Categories<span class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                            <a href="#">Categories<span class="fa fa-angle-down" aria-hidden="true"></span></a>
                             <input type="checkbox" id="drop-2" />
                             <ul>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop Now</a></li>
-                                <li><a href="single.html">Single Page</a></li>
+                                <%data.cates.forEach(function(cate){%>
+                                    <li><a href="/shop/<%=cate.slug%>"><%=cate.name%></a></li>
+                                <%})%>
                             </ul>
                         </li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/blog">Blog</a></li>
                         <li class="active"><a href="/contact">Contact</a></li>
                     </ul>
                 </nav>
@@ -67,30 +67,27 @@
                 <div class="col-md-6 contact-left-content">
                     <div class="address-con">
                         <h4 class="mb-2"><span class="fa fa-phone-square" aria-hidden="true"></span> Phone</h4>
-                        <p>+121 098 8907 9987</p>
-                        <p>+121 098 8907 9987</p>
+                        <p>0987654321</p>
                     </div>
                     <div class="address-con my-4">
                         <h4 class="mb-2"><span class="fa fa-envelope-o" aria-hidden="true"></span> Email </h4>
-                        <p><a href="mailto:info@example.com">info@example.com</a></p>
-                        <p><a href="mailto:info@example.com">info@example.com</a></p>
+                        <p><a href="mailto:info@example.com">UIT@gmail.com</a></p>
                     </div>
                     <div class="address-con mb-4">
                         <h4 class="mb-2"><span class="fa fa-fax" aria-hidden="true"></span> Fax</h4>
-
-                        <p>(800) 123-80088</p>
+                        <p>(800) 99999999</p>
                     </div>
                     <div class="address-con">
                         <h4 class="mb-2"><span class="fa fa-map-marker" aria-hidden="true"></span> Location </h4>
 
-                        <p>Honey Avenue, New York City</p>
+                        <p>University Information Technogy</p>
                     </div>
 
                 </div>
 
             </div>
             <div class="map-fo mt-lg-5 mt-4">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423286.27404345275!2d-118.69191921441556!3d34.02016130939095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos+Angeles%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1522474296007" allowfullscreen></iframe>
+                <iframe width="600" height="600" id="gmap_canvas" src="https://maps.google.com/maps?q=Khu%20ph%E1%BB%91%206%2C%20P.Linh%20Trung%2C%20Q.Th%E1%BB%A7%20%C4%90%E1%BB%A9c%2C%20TP.H%E1%BB%93%20Ch%C3%AD%20Minh.&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             </div>
         </div>
     </section>

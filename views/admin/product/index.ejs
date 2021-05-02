@@ -37,7 +37,7 @@
                         <td><%= item.name%></td>
                         <td>
                           <%cate.forEach(function(cate){%>
-                              <%if(cate._id==data.cateId){%>
+                              <%if(cate.slug == item.cateId){%>
                                   <%=cate.name%>
                               <%}%>
                           <%})%>

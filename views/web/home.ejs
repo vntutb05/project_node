@@ -17,19 +17,19 @@
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/blog">Blog</a></li>
                         <li>
                             <!-- First Tier Drop Down -->
-                            <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                            <label for="drop-2" class="toggle">Categories <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                            <a href="#">Categories<span class="fa fa-angle-down" aria-hidden="true"></span></a>
                             <input type="checkbox" id="drop-2" />
                             <ul>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop Now</a></li>
-                                <li><a href="shop-single.html">Single Page</a></li>
+                                <%data.cates.forEach(function(cate){%>
+                                    <li><a href="/shop/<%=cate.slug%>"><%=cate.name%></a></li>
+                                <%})%>  
                             </ul>
                         </li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/blog">Blog</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>
                 </nav>
@@ -100,86 +100,34 @@
     <!--/ab -->
     <section class="about py-5">
         <div class="container pb-lg-3">
-            <h3 class="tittle text-center">New Arrivals</h3>
+            <h3 class="tittle text-center">Top Products</h3>
             <div class="row">
-                <div class="col-md-4 product-men">
-                    <div class="product-shoe-info shoe text-center">
-                        <div class="men-thumb-item">
-                            <img src="assets/web/images/s3.jpg" class="img-fluid" alt="">
-                            <span class="product-new-top">New</span>
-                        </div>
-                        <div class="item-info-product">
-                            <h4>
-                                <a href="shop-single.html">(SRV) Sneakers </a>
-                            </h4>
-
-                            <div class="product_price">
-                                <div class="grid-price">
-                                    <span class="money">$575.00</span>
+                <%data.topProduct.forEach(function(top){%>
+                    <div class="col-md-4 product-men">
+                        <a href="">
+                            <div class="product-shoe-info shoe text-center">
+                                <div class="men-thumb-item">
+                                    <img src="data:<%=top.image.contentType%>;base64,<%=top.image.data%>" class="" alt="" width="300px" height="300px">
+                                    <span class="product-new-top">Top</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <h4>
+                                        <a href="shop-single.html"><%=top.name%></a>
+                                    </h4>
+        
+                                    <div class="product_price">
+                                        <div class="grid-price">
+                                            <span class="money"><%=top.price%> VND</span>
+                                        </div>
+                                    </div>
+                                    <div class="addToCard"> 
+                                        <a href="">Add to card</a>
+                                    </div>
                                 </div>
                             </div>
-                            <ul class="stars">
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                            </ul>
-                        </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-4 product-men">
-                    <div class="product-shoe-info shoe text-center">
-                        <div class="men-thumb-item">
-                            <img src="assets/web/images/s8.jpg" class="img-fluid" alt="">
-                            <span class="product-new-top">New</span>
-                        </div>
-                        <div class="item-info-product">
-                            <h4>
-                                <a href="shop-single.html">Sukun Casuals </a>
-                            </h4>
-
-                            <div class="product_price">
-                                <div class="grid-price ">
-                                    <span class="money ">$775.00</span>
-                                </div>
-                            </div>
-                            <ul class="stars">
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 product-men">
-                    <div class="product-shoe-info shoe text-center">
-                        <div class="men-thumb-item">
-                            <img src="assets/web/images/s9.jpg" class="img-fluid" alt="">
-                            <span class="product-new-top">New</span>
-                        </div>
-                        <div class="item-info-product">
-                            <h4>
-                                <a href="shop-single.html">Bank Sneakers</a>
-                            </h4>
-
-                            <div class="product_price">
-                                <div class="grid-price">
-                                    <span class="money">$875.00</span>
-                                </div>
-                            </div>
-                            <ul class="stars">
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <%})%>
             </div>
 
         </div>
@@ -199,33 +147,32 @@
         <div class="container pb-lg-3">
             <h3 class="tittle text-center">Popular Products</h3>
             <div class="row">
-                <div class="col-md-6 latest-left">
-                    <div class="product-shoe-info shoe text-center">
-                        <img src="assets/web/images/img1.jpg" class="img-fluid" alt="">
-                        <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
-                    </div>
-                </div>
-                <div class="col-md-6 latest-right">
-                    <div class="row latest-grids">
-                        <div class="latest-grid1 product-men col-12">
+                <%data.popularProduct.forEach(function(popular){%>
+                    <div class="col-md-4 product-men">
+                        <a href="">
                             <div class="product-shoe-info shoe text-center">
                                 <div class="men-thumb-item">
-                                    <img src="assets/web/images/img2.jpg" class="img-fluid" alt="">
-                                    <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
+                                    <img src="data:<%=popular.image.contentType%>;base64,<%=popular.image.data%>" class="" alt="" width="300px" height="300px">
+                                    <span class="product-new-top">Popular</span>
+                                </div>
+                                <div class="item-info-product">
+                                    <h4>
+                                        <a href="shop-single.html"><%=popular.name%></a>
+                                    </h4>
+        
+                                    <div class="product_price">
+                                        <div class="grid-price">
+                                            <span class="money"><%=popular.price%> VND</span>
+                                        </div>
+                                    </div>
+                                    <div class="addToCard"> 
+                                        <a href="">Add to card</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="latest-grid2 product-men col-12 mt-lg-4">
-                            <div class="product-shoe-info shoe text-center">
-                                <div class="men-thumb-item">
-                                    <img src="assets/web/images/img3.jpg" class="img-fluid" alt="">
-                                    <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
-
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                </div>
+                <%})%>
             </div>
         </div>
     </section>

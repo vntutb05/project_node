@@ -12,7 +12,8 @@ const productPage={
 let index = async (req,res)=>{
     try{
         let result = await productModel.find({isDeleted:0});
-        let cate = await cateModel.find();
+        let cate = await cateModel.find({isDeleted:0});
+        console.log(cate);
         return res.render('admin/layout/master',{
             content : productPage.index,
             data:result, 
@@ -54,7 +55,7 @@ let postAdd = async (req,res)=>{
         isDeleted : 0
     }
     data.popular=(param.popular=="popular")?1:0;
-    data.top=(param.top=="top")?1:0;
+    data.hot=(param.top=="top")?1:0;
     let errors = validationResult(req);
     if(!errors.isEmpty()){
         errors = errors.array();
@@ -75,7 +76,6 @@ let postAdd = async (req,res)=>{
             contentType: req.file.mimetype,
         };
     }
-    console.log(data)
     try{
         await productModel.create(data);
         req.flash('success','Thêm product thành công');
@@ -115,14 +115,13 @@ let postEdit = async(req,res)=>{
     let cate = await cateModel.find({isDeleted:0});
     let data = {
         name :param.name,
-        tag : param.tag,
         price : param.price,
         sale :param.sale,
         description : param.description,
         cateId : param.category
     }
     data.popular=(param.popular=="popular")?1:0;
-    data.top=(param.top=="top")?1:0;
+    data.hot=(param.top=="top")?1:0;
     let errors = validationResult(req);
     try {
         if(!errors.isEmpty()){

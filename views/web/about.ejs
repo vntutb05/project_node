@@ -17,20 +17,20 @@
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
                         <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/blog">Blog</a></li>
                         <li>
                             <!-- First Tier Drop Down -->
-                            <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                            <label for="drop-2" class="toggle">Categories<span class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                            <a href="#">Categories<span class="fa fa-angle-down" aria-hidden="true"></span></a>
                             <input type="checkbox" id="drop-2" />
                             <ul>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop Now</a></li>
-                                <li><a href="single.html">Single Page</a></li>
+                                <%data.cates.forEach(function(cate){%>
+                                    <li><a href="/shop/<%=cate.slug%>"><%=cate.name%></a></li>
+                                <%})%>
                             </ul>
                         </li>
-                        <li class="active"><a href="/contact">Contact</a></li>
+                        <li class="active"><a href="/about">About</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li ><a href="/contact">Contact</a></li>
                     </ul>
                 </nav>
                 <!-- //nav -->
@@ -95,7 +95,7 @@
         <div class="row banner-grids">
             <div class="col-md-6 banner-image">
                 <div class="effect-w3">
-                    <img src="images/about.jpg" alt="" class="img-fluid image1">
+                    <img src="assets/web/images/about.jpg" alt="" class="img-fluid image1">
 
                 </div>
 
@@ -272,13 +272,17 @@
     <div class="container pb-lg-3">
         <h3 class="tittle text-center">Popular Products</h3>
         <div class="row">
-            <div class="col-md-6 latest-left">
-                <div class="product-shoe-info shoe text-center">
-                    <img src="images/img1.jpg" class="img-fluid" alt="">
-                    <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
+            <%data.popularProduct.forEach(function(popular){%>
+                <div class="col-md-6">
+                    <div class="product-shoe-info shoe text-center">
+                        <a href="">
+                            <img src="data:<%=popular.image.contentType%>;base64,<%=popular.image.data%>"  alt="" width="508" height="400">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 latest-right">
+            <%})%>
+            
+            <!-- <div class="col-md-6 latest-right">
                 <div class="row latest-grids">
                     <div class="latest-grid1 product-men col-12">
                         <div class="product-shoe-info shoe text-center">
@@ -298,7 +302,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>

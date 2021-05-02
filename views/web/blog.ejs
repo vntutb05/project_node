@@ -18,20 +18,20 @@
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
                         <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/blog">Blog</a></li>
                         <li>
                             <!-- First Tier Drop Down -->
-                            <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                            <label for="drop-2" class="toggle">Categories<span class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                            <a href="#">Categories<span class="fa fa-angle-down" aria-hidden="true"></span></a>
                             <input type="checkbox" id="drop-2" />
                             <ul>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop Now</a></li>
-                                <li><a href="single.html">Single Page</a></li>
+                                <%data.cates.forEach(function(cate){%>
+                                    <li><a href="/shop/<%=cate.slug%>"><%=cate.name%></a></li>
+                                <%})%>
                             </ul>
                         </li>
-                        <li class="active"><a href="/contact">Contact</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li class="active"><a href="/blog">Blog</a></li>
+                        <li ><a href="/contact">Contact</a></li>
                     </ul>
                 </nav>
                 <!-- //nav -->
@@ -57,7 +57,7 @@
                 <div class="item col-lg-4">
                     <div class="thumbnail card">
                         <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="images/img2.jpg" alt="" />
+                            <img class="group list-group-image img-fluid" src="assets/web/images/img2.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading">
@@ -79,7 +79,7 @@
                 <div class="item col-lg-4">
                     <div class="thumbnail card">
                         <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="images/img5.jpg" alt="" />
+                            <img class="group list-group-image img-fluid" src="assets/web/images/img5.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading">
@@ -101,7 +101,7 @@
                 <div class="item col-lg-4">
                     <div class="thumbnail card">
                         <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="images/img3.jpg" alt="" />
+                            <img class="group list-group-image img-fluid" src="assets/web/images/img3.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading">
@@ -123,7 +123,7 @@
                 <div class="item col-lg-4 mt-lg-4">
                     <div class="thumbnail card">
                         <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="images/img4.jpg" alt="" />
+                            <img class="group list-group-image img-fluid" src="assets/web/images/img4.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading">
@@ -145,7 +145,7 @@
                 <div class="item col-lg-4 mt-lg-4">
                     <div class="thumbnail card">
                         <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="images/img6.jpg" alt="" />
+                            <img class="group list-group-image img-fluid" src="assets/web/images/img6.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading">
@@ -167,7 +167,7 @@
                 <div class="item col-lg-4 mt-lg-4">
                     <div class="thumbnail card">
                         <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="images/img7.jpg" alt="" />
+                            <img class="group list-group-image img-fluid" src="assets/web/images/img7.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading">
