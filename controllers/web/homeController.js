@@ -5,12 +5,13 @@ const homePage ={
     blog : 'blog',
     contact : 'contact',
     about : 'about',
-    shop : 'shop'
+    shop : 'shop',
+    single : 'single'
 }
 let home = async(req,res)=>{
     try{
-        let popularProduct = await productModel.find({popular:true}).limit(3);
-        let topProduct = await productModel.find({hot:true}).limit(6);
+        let popularProduct = await productModel.find({popular:true,isDeleted:0}).limit(3);
+        let topProduct = await productModel.find({hot:true,isDeleted:0}).limit(6);
         let cates = await cateModel.find({isDeleted:0});
         return res.render('web/layout/master',{
             content :homePage.home,
@@ -80,7 +81,7 @@ let contact = async(req,res)=>{
 let shop = async(req,res)=>{
     try{
         let slug = req.params.slug;
-        let products = await productModel.find({cateId:slug});
+        let products = await productModel.find({cateId:slug,isDeleted:0});
         let popularProduct = await productModel.find({popular:true}).limit(5);
         let cates = await cateModel.find({isDeleted:0});
         return res.render('web/layout/master',{
@@ -98,10 +99,32 @@ let shop = async(req,res)=>{
         })
     }
 }
+let single = async (req,res)=>{
+    try {
+        let cates = await cateModel.find();
+        let slug = req.params.slug;
+        let detailProduct = await productModel.findOne({slug:slug});
+        let popularProduct = await productModel.find({popular:true}).limit(3);
+        return res.render('web/layout/master',{
+            content : homePage.single,
+            data:{
+                cates : cates,
+                detailProduct : detailProduct,
+                popularProduct: popularProduct
+            }
+        })
+    } catch (error) {
+        return res.status(500).json({
+            type: 'Error',
+            msg : error
+        })
+    }
+}
 module.exports = {
     home:home,
     blog : blog,
     contact : contact,
     about : about,
-    shop : shop
+    shop : shop,
+    single : single
 }

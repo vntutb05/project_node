@@ -13,7 +13,6 @@ let index = async (req,res)=>{
     try{
         let result = await productModel.find({isDeleted:0});
         let cate = await cateModel.find({isDeleted:0});
-        console.log(cate);
         return res.render('admin/layout/master',{
             content : productPage.index,
             data:result, 
@@ -120,8 +119,8 @@ let postEdit = async(req,res)=>{
         description : param.description,
         cateId : param.category
     }
-    data.popular=(param.popular=="popular")?1:0;
-    data.hot=(param.top=="top")?1:0;
+    data.popular = (param.popular=="popular")?1:0;
+    data.hot = (param.top=="top")?1:0;
     let errors = validationResult(req);
     try {
         if(!errors.isEmpty()){

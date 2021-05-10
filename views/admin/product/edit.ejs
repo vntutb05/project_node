@@ -14,7 +14,7 @@
                     <label for="exampleFormControlSelect1">Category select</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="category">
                         <% cate.forEach(function(item){%>
-                            <%if(data.cateId == item._id){%>
+                            <%if(data.cateId == item.slug){%>
                                 <option value="<%=item.slug%>" selected><%=item.name%></option>
                             <%}else{%>
                                 <option value="<%=item.slug%>" ><%=item.name%></option>

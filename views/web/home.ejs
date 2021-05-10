@@ -104,7 +104,7 @@
             <div class="row">
                 <%data.topProduct.forEach(function(top){%>
                     <div class="col-md-4 product-men">
-                        <a href="">
+                        <a href="/product/<%=top.slug%>">
                             <div class="product-shoe-info shoe text-center">
                                 <div class="men-thumb-item">
                                     <img src="data:<%=top.image.contentType%>;base64,<%=top.image.data%>" class="" alt="" width="300px" height="300px">
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="item-info-product">
                                     <h4>
-                                        <a href="shop-single.html"><%=top.name%></a>
+                                        <a href="/product/<%=top.slug%>"><%=top.name%></a>
                                     </h4>
         
                                     <div class="product_price">
@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
                                     <div class="addToCard"> 
-                                        <a href="">Add to card</a>
+                                        <a href="/product/<%=top.slug%>">Add to card</a>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
             <div class="row">
                 <%data.popularProduct.forEach(function(popular){%>
                     <div class="col-md-4 product-men">
-                        <a href="">
+                        <a href="/product/<%=popular.slug%>">
                             <div class="product-shoe-info shoe text-center">
                                 <div class="men-thumb-item">
                                     <img src="data:<%=popular.image.contentType%>;base64,<%=popular.image.data%>" class="" alt="" width="300px" height="300px">
@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="item-info-product">
                                     <h4>
-                                        <a href="shop-single.html"><%=popular.name%></a>
+                                        <a href="/product/<%=popular.slug%>"><%=popular.name%></a>
                                     </h4>
         
                                     <div class="product_price">
@@ -166,7 +166,7 @@
                                         </div>
                                     </div>
                                     <div class="addToCard"> 
-                                        <a href="">Add to card</a>
+                                        <a href="/product/<%=popular.slug%>">Add to card</a>
                                     </div>
                                 </div>
                             </div>
