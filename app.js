@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const redis = require('redis');
+const morgan = require('morgan')
 const server = require('./config/server');
 const connectDB = require('./config/database');
 const router = require('./routes/admin/router');
@@ -22,6 +23,7 @@ app.use(flash());
     secret: 'somesecret', 
     cookie: { maxAge: 60000 }})
 ); */
+app.use(morgan('tiny'));
 app.use(
     session({
       store: new RedisStore({ client: redisClient }),

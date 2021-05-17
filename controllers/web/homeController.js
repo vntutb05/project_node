@@ -10,6 +10,12 @@ const homePage ={
 }
 let home = async(req,res)=>{
     try{
+        let lengthCart;
+        if(req.session.cart == undefined){
+            lengthCart = 0;
+        }else{
+            lengthCart = req.session.cart.length;
+        };
         let popularProduct = await productModel.find({popular:true,isDeleted:0}).limit(3);
         let topProduct = await productModel.find({hot:true,isDeleted:0}).limit(6);
         let cates = await cateModel.find({isDeleted:0});
@@ -18,7 +24,8 @@ let home = async(req,res)=>{
             data:{
                 popularProduct : popularProduct,
                 topProduct : topProduct,
-                cates : cates
+                cates : cates,
+                lengthCart : lengthCart
             }
         })
     }catch(err){
@@ -30,11 +37,17 @@ let home = async(req,res)=>{
 }
 let blog = async(req,res)=>{
     try{
+        if(req.session.cart == undefined){
+            lengthCart = 0;
+        }else{
+            lengthCart = req.session.cart.length;
+        };
         let cates = await cateModel.find({isDeleted:0});
         return res.render('web/layout/master',{
             content :homePage.blog,
             data:{
-                cates:cates
+                cates:cates,
+                lengthCart:lengthCart
             }
         })
     }catch(err){
@@ -46,13 +59,19 @@ let blog = async(req,res)=>{
 }
 let about = async(req,res)=>{
     try{
+        if(req.session.cart == undefined){
+            lengthCart = 0;
+        }else{
+            lengthCart = req.session.cart.length;
+        };
         let popularProduct = await productModel.find({popular:true}).limit(2);
         let cates = await cateModel.find({isDeleted:0});
         return res.render('web/layout/master',{
             content :homePage.about,
             data:{
                 cates:cates,
-                popularProduct : popularProduct
+                popularProduct : popularProduct,
+                lengthCart:lengthCart
             }
         })
     }catch(err){
@@ -64,11 +83,17 @@ let about = async(req,res)=>{
 }
 let contact = async(req,res)=>{
     try{
+        if(req.session.cart == undefined){
+            lengthCart = 0;
+        }else{
+            lengthCart = req.session.cart.length;
+        };
         let cates = await cateModel.find({isDeleted:0});
         return res.render('web/layout/master',{
             content :homePage.contact,
             data:{
-                cates:cates
+                cates:cates,
+                lengthCart:lengthCart
             }
         })
     }catch(err){
@@ -80,6 +105,11 @@ let contact = async(req,res)=>{
 }
 let shop = async(req,res)=>{
     try{
+        if(req.session.cart == undefined){
+            lengthCart = 0;
+        }else{
+            lengthCart = req.session.cart.length;
+        };
         let slug = req.params.slug;
         let products = await productModel.find({cateId:slug,isDeleted:0});
         let popularProduct = await productModel.find({popular:true}).limit(5);
@@ -89,7 +119,8 @@ let shop = async(req,res)=>{
             data :{
                 products : products,
                 cates : cates,
-                popularProduct : popularProduct
+                popularProduct : popularProduct,
+                lengthCart:lengthCart
             }
         })
     }catch(err){
@@ -101,6 +132,11 @@ let shop = async(req,res)=>{
 }
 let single = async (req,res)=>{
     try {
+        if(req.session.cart == undefined){
+            lengthCart = 0;
+        }else{
+            lengthCart = req.session.cart.length;
+        };
         let cates = await cateModel.find();
         let slug = req.params.slug;
         let detailProduct = await productModel.findOne({slug:slug});
@@ -110,7 +146,8 @@ let single = async (req,res)=>{
             data:{
                 cates : cates,
                 detailProduct : detailProduct,
-                popularProduct: popularProduct
+                popularProduct: popularProduct,
+                lengthCart:lengthCart
             }
         })
     } catch (error) {

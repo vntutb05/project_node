@@ -24,11 +24,16 @@ module.exports = {
         let email = param.email;
         let password = param.password;
         try{
-            let user = await userModel.findOne({email:email,isAdmin:[0,1]});
+            let user = await userModel.findOne(
+                {
+                    email:email,
+                    isAdmin:[0,1]
+                });
             if(user){
                 let hash = bcrypt.compareSync(password,user.password);
+                // hash return true hoặc false
                 if(hash){
-                    req.session.user= user;
+                    req.session.user = user;
                     req.flash('success','Đăng nhập thành công');
                     return res.redirect('/admin/');
                 }

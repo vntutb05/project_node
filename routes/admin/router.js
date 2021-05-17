@@ -9,4 +9,5 @@ router.use("/admin/user",userRoute);
 router.use("/admin/cate",categoryRoute);
 router.use("/admin/product",productRoute);
 router.use('/admin',adminRoute);
+
 module.exports = router;

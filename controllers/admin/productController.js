@@ -3,6 +3,7 @@ const cateModel = require('../../models/categoryModel');
 const slug = require('slug');
 const fs = require('fs');
 const {validationResult} = require('express-validator');
+// const session = require('express-session');
 const productPage={
     index: "product/index",
     add: "product/add",
@@ -11,6 +12,7 @@ const productPage={
 // index product
 let index = async (req,res)=>{
     try{
+        console.log(userLogin);
         let result = await productModel.find({isDeleted:0});
         let cate = await cateModel.find({isDeleted:0});
         return res.render('admin/layout/master',{
