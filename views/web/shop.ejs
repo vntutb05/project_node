@@ -26,7 +26,7 @@
                     <li><a href="/about">About</a></li>
                     <li><a href="/blog">Blog</a></li>
                     <li><a href="/contact">Contact</a></li>
-                    <li><a href="/cart">Cart<small>(0)</small></a></li>
+                    <li><a href="/cart">Cart<small>(<%=data.lengthCart%>)</small></a></li>
                 </ul>
             </nav>
         </div>
@@ -76,13 +76,13 @@
                     <h3 class="sear-head">Popular</h3>
                     <%data.popularProduct.forEach(function(popular){%>
                         <div class="special-sec1 row mt-2">
-                            <a href="">
+                            <a href="/product/<%=popular.slug%>">
                                 <div class="img-deals col-md-4">
                                     <img src="data:<%=popular.image.contentType%>;base64,<%=popular.image.data%>"  alt="" width="120px" height="70px" >
                                 </div>
                                 <div class="img-deal1 col-md-4">
                                     <h3><%= popular.name%></h3>
-                                    <a href="shop-single.html"><%= popular.price%> VND</a>
+                                    <a href="/product/<%=popular.slug%>"><%= popular.price%> VND</a>
                                 </div>
                             </a>
                         </div>
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="item-info-product">
                                     <h4>
-                                        <a href="shop-single.html"><%=item.name%></a>
+                                        <a href="/product/<%=item.slug%>"><%=item.name%></a>
                                     </h4>
     
                                     <div class="product_price">
@@ -112,7 +112,7 @@
                                         </div>
                                     </div>
                                     <div class="addToCard"> 
-                                        <a href="">Add to card</a>
+                                        <a href="/product/<%=item.slug%>">Add to card</a>
                                     </div>
                                 </div>
                             </div>

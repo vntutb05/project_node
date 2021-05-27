@@ -17,20 +17,21 @@ connectDB();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(flash());
-/* app.use(session({
+app.use(session({
     resave: true, 
     saveUninitialized: true, 
     secret: 'somesecret', 
     cookie: { maxAge: 60000 }})
-); */
+);
 app.use(morgan('tiny'));
-app.use(
-    session({
-      store: new RedisStore({ client: redisClient }),
-      secret: 'keyboard cat',
-      resave: false
-    }
-  ))
+// app.use(
+//     session({
+//       store: new RedisStore({ client: redisClient }),
+//       secret: 'keyboard cat',
+//       resave: false,
+//     }
+//   ))
+
 app.use(globalVariable);
 app.use('/assets', express.static(__dirname + '/public'));
 app.set("view engine", "ejs");

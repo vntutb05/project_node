@@ -20,6 +20,8 @@ module.exports = {
         return await res.render("admin/login");
     },
     postLogin : async (req,res)=>{
+
+        console.log(req);
         let param = req.body;
         let email = param.email;
         let password = param.password;
@@ -35,6 +37,10 @@ module.exports = {
                 if(hash){
                     req.session.user = user;
                     req.flash('success','Đăng nhập thành công');
+                    // return res.status(200).json({
+                    //     data:req.session.user
+                    // });
+                    console.log(req.session);
                     return res.redirect('/admin/');
                 }
                 req.flash('error','Mật khẩu không chính xác')

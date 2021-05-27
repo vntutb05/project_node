@@ -276,7 +276,7 @@
             <%data.popularProduct.forEach(function(popular){%>
                 <div class="col-md-6">
                     <div class="product-shoe-info shoe text-center">
-                        <a href="">
+                        <a href="/product/<%=popular.slug%>">
                             <img src="data:<%=popular.image.contentType%>;base64,<%=popular.image.data%>"  alt="" width="508" height="400">
                         </a>
                     </div>
