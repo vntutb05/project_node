@@ -40,7 +40,7 @@ let addToCart = async(req,res) => {
             })
         }
     }
-    return res.redirect('cart');
+    return res.redirect('/cart');
 }
 let getCart = async(req,res) => {
     try {
@@ -76,8 +76,6 @@ let getCart = async(req,res) => {
 let postCart = async(req,res) =>{   
     try{
         let param = req.body;
-        console.log(param);
-        console.log(req.session.cart)
         let data ={
             infoProduct:req.session.cart,
             infoCustomer:param
