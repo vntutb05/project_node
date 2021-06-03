@@ -12,8 +12,7 @@ const productPage={
 // index product
 let index = async (req,res)=>{
     try{
-        console.log(userLogin);
-        let result = await productModel.find({isDeleted:0});
+        let result = await productModel.find();
         let cate = await cateModel.find({isDeleted:0});
         return res.render('admin/layout/master',{
             content : productPage.index,
@@ -21,7 +20,7 @@ let index = async (req,res)=>{
             cate:cate
         });
     }catch(err){
-        return res.status(400).json({
+        return res.status(500).json({
             type:'error',
             message:err
         });

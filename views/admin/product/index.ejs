@@ -15,7 +15,6 @@
                       <th>Sale Price</th>
                       <th>Image</th>
                       <th>Decription</th>
-                      <th>Start upload</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -27,7 +26,6 @@
                       <th>Sale Price</th>
                       <th>Image</th>
                       <th>Decription</th>
-                      <th>Start upload</th>
                       <th>Action</th>
                     </tr>
                   </tfoot>
@@ -46,7 +44,6 @@
                         <td><%= item.sale%></td>
                         <td><img src="data:<%=item.image.contentType%>;base64,<%=item.image.data%>" height="64px" width="64px">  </td>
                         <td><%= item.description%></td>
-                        <td>2011/04/25</td>
                         <td>
                               <a href="/admin/product/edit/<%=item._id%>" class="alert alert-primary">Edit</a>
                               <a href="/admin/product/delete/<%=item._id%>" class="alert alert-danger">Delete</a>

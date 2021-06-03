@@ -14,7 +14,6 @@
               <th>Adrress</th>
               <th>Phone</th>
               <th>isAdmin</th>
-              <th>Date created</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -25,7 +24,6 @@
               <th>Adrress</th>
               <th>Phone</th>
               <th>isAdmin</th>
-              <th>Date created</th>
               <th>Action</th>
             </tr>
           </tfoot>
@@ -45,9 +43,6 @@
                   <%=item.phone%>
                 </td>
                 <td>true</td>
-                <td>
-                  <%=item.creationDate%>
-                </td>
                 <td>
                   <a href="/admin/user/edit/<%=item._id%>" class="alert alert-primary">Edit</a>
                   <a href="/admin/user/delete/<%=item._id%>" class="alert alert-danger">Delete</a>

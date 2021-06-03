@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" cols= "160" rows="4"></textarea>
+                    <input type="text" placeholder="Your Description.." class="form-control" id="description" name="description" value ="<%=(typeof(data)=='undefined') ? '' :data.description%>">
                 </div>
                 <div class="form-group">
                     <label for="iamge">Image</label>
