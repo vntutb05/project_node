@@ -9,7 +9,7 @@ const catePage ={
 module.exports = {
     index : async(req,res)=>{
         try{
-            let result = await categoryModel.find({isDeleted:0});
+            let result = await categoryModel.find();
             return res.render('admin/layout/master',{
                 content:catePage.index,
                 data:result
@@ -93,7 +93,7 @@ module.exports = {
     delete : async (req,res)=>{
         let id = req.params.id;
         try{   
-            let findCate = await categoryModel.findOne({_id:id});
+            let findCate = await categoryModel.deleteOne({_id:id});
             await categoryModel.updateOne({_id:id},{$set:{isDeleted:1}});
             if(findCate === null){
                 return res.render('admin/404');

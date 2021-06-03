@@ -21,7 +21,7 @@ let getAdd = async (req,res)=>{
     try{
         return await res.render('admin/layout/master',{
             content : userPage.add,
-            data :''
+            data : ''
         })
     }catch(err){
         return res.status(500).json(err);

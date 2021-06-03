@@ -146,7 +146,7 @@ let postEdit = async(req,res)=>{
 let _delete = async(req,res)=>{
     let id = req.params.id;
     try{
-        let foundProduct = await productModel.findOne({_id:id});
+        let foundProduct = await productModel.deleteOne({_id:id});
         if(foundProduct === null ){
             return res.render('admin/404');
         }

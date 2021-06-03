@@ -43,11 +43,13 @@ let blog = async(req,res)=>{
             lengthCart = req.session.cart.length;
         };
         let cates = await cateModel.find({isDeleted:0});
+        let product = await productModel.find({isDeleted:0}).limit(6);
         return res.render('web/layout/master',{
             content :homePage.blog,
             data:{
                 cates:cates,
-                lengthCart:lengthCart
+                lengthCart:lengthCart,
+                product: product
             }
         })
     }catch(err){

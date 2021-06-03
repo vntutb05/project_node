@@ -1,6 +1,6 @@
 const productModel = require("../../models/productModel");
 const cateModel = require('../../models/categoryModel');
-const cartMode = require('../../models/invoiceModel');
+const cartModel = require('../../models/cartModel');
 let cartPage = {
     cart : "cart",
     checkout : "checkout"
@@ -14,7 +14,6 @@ let addToCart = async(req,res) => {
             name : product.name,
             slug : product.slug,
             price : product.price,
-            image : product.image,
             qty :1,
             total : product.price*1
         })
@@ -76,13 +75,20 @@ let getCart = async(req,res) => {
 let postCart = async(req,res) =>{   
     try{
         let param = req.body;
+        let cart = req.session.cart;
+        let total=0;
+        if(cart != undefined){
+            for(let i=0;i<cart.length;i++){
+                total +=cart[i].total;
+            }
+        }
         let data ={
             infoProduct:req.session.cart,
-            infoCustomer:param
+            infoCustomer:param,
+            total : total
         }
-        console.log(data);
-        await cartModel.create(data);
-        return res.reridect('/');
+       await cartModel.create(data);
+        return res.redirect("/")
     }catch(error){
         return res.status(500).json({
             type: 'Error',
