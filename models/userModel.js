@@ -35,4 +35,15 @@ const userSchema = new Schema({
     }
 })
 let userModel = mongoose.model('user',userSchema);
+// userModel.create(
+//     {
+//         "email" : "admin1@gmail.com",
+//         "name" : "Vu Tu122",
+//         "address" : "TPHCM",
+//         "phone" : 123456789,
+//         "password" : "$2b$10$hN/3CRXPoo6FryrVfdTFLeBVMZRv/jmTit5WSlHQKUxoWjNF316CG",
+//         "isAdmin" : 0,
+//         "isDeleted" : false,
+//     }
+// )
 module.exports = userModel;

@@ -1,6 +1,6 @@
 const userModel = require('../../models/userModel');
 const {validationResult} = require('express-validator');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const userPage = {
     index : 'user/index',
     add : 'user/add',

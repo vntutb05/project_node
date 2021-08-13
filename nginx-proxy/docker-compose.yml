@@ -1,0 +1,16 @@
+version: '3'
+services:
+    app:
+        image: nginx
+        volumes:
+            - ./conf/default.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx.conf:/etc/nginx/nginx.conf
+            - ../public:/usr/share/nginx/public/
+            - ./429.html:/usr/share/nginx/html/429.html
+        ports:
+            - "80" 
+        networks: 
+            - project_node_server
+networks: 
+    project_node_server:
+        external: true

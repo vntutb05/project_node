@@ -10,12 +10,12 @@ const router = require('./routes/admin/router');
 const webRoute = require('./routes/web/index');
 const {globalVariable}=require('./config/config');
 
-let redisClient = redis.createClient(12998, 'redis-12998.c10.us-east-1-2.ec2.cloud.redislabs.com',{password:"P7gxdQtx6TFXRXGZwuEDmyfN4siGCzze"});
-let RedisStore = require('connect-redis')(session)
+// let redisClient = redis.createClient(12998, 'redis-12998.c10.us-east-1-2.ec2.cloud.redislabs.com',{password:"P7gxdQtx6TFXRXGZwuEDmyfN4siGCzze"});
+// let RedisStore = require('connect-redis')(session)
 let app = express();
 connectDB();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(flash());
 app.use(session({
     resave: true, 

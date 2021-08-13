@@ -1,6 +1,6 @@
 const userModel = require('../../models/userModel');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const page = {
     notFind:'/404',
     index:'/index',
@@ -40,7 +40,7 @@ module.exports = {
                     // return res.status(200).json({
                     //     data:req.session.user
                     // });
-                    console.log(req.session);
+                    console.log(req.session.user);
                     return res.redirect('/admin/');
                 }
                 req.flash('error','Mật khẩu không chính xác')
